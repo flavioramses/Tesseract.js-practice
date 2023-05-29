@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tesseract</title>
+    <style>
+      body,
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #preview {
+        max-width: 300px;
+        min-height: 160px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Form to submit the image to the /upload enpoint -->
+    <form
+      action="/upload"
+      method="POST"
+      enctype="multipart/form-data"
+      target="response-frame"
+    >
+      <!-- Preview of the selected image -->
+      <input type="file" name="image" id="image-input" accept="image/*" />
+      <img id="preview" src="https://picsum.photos/300/160" />
+
+      <button>Submit</button>
+
+      <!-- Frame to display the response -->
+      <iframe id="response-frame" name="response-frame"></iframe>
+    </form>
+  </body>
+  <script>
+    const input = document.getElementById("image-input");
+    const preview = document.getElementById("preview");
+
+    input.addEventListener("change", (e) => {
+      preview.src = URL.createObjectURL(e.target.files[0]);
+    });
+  </script>
+</html>
